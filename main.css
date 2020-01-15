@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+  margin: 0 auto;
+}
+.hidden {
+  display: none;
+}
+.heading {
+  font-size: 3em;
+  font-family: 'Oswald', 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+    sans-serif;
+  text-transform: uppercase;
+}
+.center {
+  text-align: center;
+}
+#results {
+  width: 70%;
+  text-align: left;
+}
+li {
+  list-style: none;
+}
