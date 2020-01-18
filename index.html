@@ -16,15 +16,21 @@
       <h1 class="heading">National Parks Info Search</h1>
 
       <form id="js-form">
-        <label for="state-search">
-          Which state(s) would you like to search in? (i.e., CA, NY)
-        </label>
-        <input type="text" name="state-search" id="js-state-search" required />
-
-        <label for="max-results"
-          >Number of results to return(Maximum num: 50)</label
-        >
-        <input type="text" name="max-results" id="js-max-results" />
+        <div class="search-form">
+          <label for="state-search">
+            Which state(s) would you like to search in? (i.e., CA, NY)
+          </label>
+          <input
+            type="text"
+            name="state-search"
+            id="js-state-search"
+            required
+          />
+        </div>
+        <div class="search-form">
+          <label for="max-results">Number of results to return (Max: 50)</label>
+          <input type="text" name="max-results" id="js-max-results" />
+        </div>
 
         <input type="submit" value="Search!" />
       </form>

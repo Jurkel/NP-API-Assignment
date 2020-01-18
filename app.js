@@ -25,6 +25,8 @@ function displayResults(responseJson) {
 
   $('#results').removeClass('hidden');
   $('h2').removeClass('hidden');
+  $('#js-state-search').val('');
+  $('#js-max-results').val('');
 }
 
 function getNatPark(query, maxResults = 10) {
@@ -52,13 +54,48 @@ function getNatPark(query, maxResults = 10) {
     });
 }
 
+function validateSearch(stateSearch) {
+  const searchInput = stateSearch.replace(/\s+/g, '');
+  const trimmedSearch = searchInput.split(',');
+
+  console.log(trimmedSearch);
+
+  if (trimmedSearch > 1) {
+    for (let i = 0; i < trimmedSearch.length; i++) {
+      if (trimmedSearch[i].length > 2) {
+        $('#js-state-search').append(
+          `States must be in State Code: (i.e., Arizona = AZ)`
+        );
+      } else {
+        return trimmedSearch.toString();
+      }
+    }
+  } else if (trimmedSearch[0].length > 2) {
+    $('#js-error-message').text(
+      `States must be in State Code: (i.e., Arizona = AZ)`
+    );
+  } else {
+    return trimmedSearch[0].toString();
+  }
+}
+
 function watchForm() {
   $('form').submit(event => {
+    $('.error-message').empty();
     event.preventDefault();
-    const searchInput = $('#js-state-search').val();
-    const stateSearch = searchInput.replace(/\s+/g, '');
+    let searchCount = 0;
+
+    const stateSearch = $('#js-state-search').val();
+    validateSearch(stateSearch);
     const maxResults = $('#js-max-results').val();
-    getNatPark(stateSearch, maxResults);
+
+    if (maxResults < 1 || maxResults > 50) {
+      $('#js-error-message').text(
+        'Please enter a valid number between 1 and 50'
+      );
+    } else {
+      getNatPark(stateSearch, maxResults);
+    }
   });
 }
 
